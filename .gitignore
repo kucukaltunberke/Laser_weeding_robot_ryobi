@@ -1,0 +1,32 @@
+# ==== Catkin Build Artifacts ====
+build/
+devel/
+logs/
+install/
+
+# ==== TensorRT Engine Files (platform-specific binaries, too large for Git) ====
+*.engine
+
+# ==== Archive of the source (redundant) ====
+src.zip
+
+# ==== Python bytecode ====
+__pycache__/
+*.pyc
+*.pyo
+
+# ==== IDE / Editor ====
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# ==== OS-generated ====
+.Trash-*/
+.DS_Store
+Thumbs.db
+
+# ==== ROS logs & bags ====
+*.bag
+*.log

@@ -1,0 +1,18 @@
+<launch>
+  <!-- ======================== -->
+  <!--  Ryobi Full System Launch -->
+  <!-- ======================== -->
+
+  <!-- 1. ZED Mini Camera -->
+  <include file="$(find zed_wrapper)/launch/zedm.launch" />
+
+  <!-- 2. Weed Detector (YOLOv8 TensorRT) -->
+  <node pkg="image_processing" type="weed_detector.py" name="weed_detector" output="screen" />
+
+  <!-- 3. Dynamixel Servo Driver -->
+  <include file="$(find ryobi_control)/launch/dynamixel.launch" />
+
+  <!-- 4. Laser Targeter -->
+  <node pkg="ryobi_control" type="laser_targeter" name="laser_targeter" output="screen" />
+
+</launch>
