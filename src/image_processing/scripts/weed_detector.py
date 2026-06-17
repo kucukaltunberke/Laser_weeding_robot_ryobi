@@ -1,5 +1,10 @@
 #!/usr/bin/env python3
+import sys
+import os
+import time
 import rospy
+import rospkg
+import message_filters
 from sensor_msgs.msg import Image, CompressedImage
 from geometry_msgs.msg import Point, Point32, Polygon
 from std_srvs.srv import Trigger, TriggerResponse
@@ -181,12 +186,10 @@ class WeedDetector:
         rospy.init_node('weed_detector_yolo', anonymous=True)
 
         # 2. Load your custom trained model directly from TensorRT PyCUDA wrapper
-        import rospkg, os
         model_path = os.path.join(rospkg.RosPack().get_path('image_processing'), 'weight', 'new_weed_detector.engine')
         self.model = YOLOv8TRT(model_path)
 
         # 4. Use message_filters to synchronize RGB and Depth images
-        import message_filters
         # Set queue_size=1 so ROS drops old frames instead of building a backlog
         self.rgb_sub = message_filters.Subscriber("/zedm/zed_node/left/image_rect_color", Image, queue_size=1, buff_size=2**24)
         self.depth_sub = message_filters.Subscriber("/zedm/zed_node/depth/depth_registered", Image, queue_size=1, buff_size=2**24)
@@ -194,7 +197,6 @@ class WeedDetector:
         self.ts = message_filters.ApproximateTimeSynchronizer([self.rgb_sub, self.depth_sub], queue_size=1, slop=0.1)
         self.ts.registerCallback(self.image_callback)
 
-        import sys, os, rospkg
         script_path = os.path.join(rospkg.RosPack().get_path('image_processing'), 'scripts')
         sys.path.append(script_path)
         from weed_coordinate_solver import WeedCoordinateSolver
@@ -244,12 +246,10 @@ class WeedDetector:
         is_bgr = 'bgr' in rgb_data.encoding.lower()
 
         # 6. Run TensorRT inference natively on GPU execution context
-        import time
         start_time = time.time()
         results = self.model.infer(cv_image, is_bgr=is_bgr)
         rospy.loginfo("Inference processed in {:.2f} seconds".format(time.time() - start_time))
 
-        import cv2
         annotated_frame = cv_image.copy()
         weed_polygon = Polygon()
 

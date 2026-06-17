@@ -248,7 +248,6 @@ bool LaserTargeter::targetCoordinateCallback(
 }
 
 double LaserTargeter::calculateTiltAngle(double r, double z, double beta_val) {
-  const double PI = 3.14159265358979323846;
   double a = 0.055; // Bracket length in meters
   double alpha_beam = PI - beta_val;
 
