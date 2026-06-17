@@ -1,9 +1,9 @@
 # 🤖 Ryobi Weed Detection & Pointer Laser Targeting System
 
-An advanced, high-performance ROS (Robot Operating System) robotic vision and laser-targeting pipeline deployed on the **NVIDIA Jetson Nano** platform. This repository integrates real-time object detection via **YOLOv8** accelerated with **TensorRT**, spatial coordinate solving using **ZED Mini** stereo depth camera intrinsics, and physical target acquisition using a custom **Dynamixel** pan-tilt servo mechanism guiding a targeting pointer laser.
+A ROS (Robot Operating System) robotic vision and laser-targeting pipeline deployed on the **NVIDIA Jetson Nano** platform. This repository integrates object detection via **YOLOv8** accelerated with **TensorRT**, spatial coordinate solving using **ZED Mini** stereo camera intrinsics, and physical target acquisition using a custom **Dynamixel** pan-tilt servo mechanism guiding a pointer laser.
 
 > [!NOTE]
-> **Hardware Demonstration Note:** Due to project budget limitations, a low-cost, safe **pointer laser** was used instead of a high-power agricultural/thermal laser. The software remains fully compatible with industrial targeting systems.
+> **Hardware Demonstration Note:** Due to project budget limitations, a low-cost, safe **pointer laser** was used instead of a high-power agricultural/thermal laser to demonstrate the targeting capabilities of the system.
 
 ---
 
