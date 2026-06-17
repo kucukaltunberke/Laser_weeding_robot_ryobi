@@ -156,7 +156,27 @@ For debugging, open separate terminals:
 * **Laser Targeter Node**:
   ```bash
   rosrun ryobi_control laser_targeter
-  ```
+
+### 4. Running the Operation (Service Commands)
+Once the system is launched, the nodes run in the background in an `IDLE` state. You can trigger actions by calling the following ROS services in a new terminal:
+
+*   **Trigger Full Detection and Targeting Cycle**:
+    ```bash
+    rosservice call /start_targeting
+    ```
+    *This runs a single-shot object detection on the latest synchronized ZED frame, calculates coordinates and kinematics offsets, and guides the pointer laser to aim at each detected weed sequentially.*
+
+*   **Manual Target Aiming Command**:
+    To target a specific physical 3D coordinate $(x, y, z)$ manually:
+    ```bash
+    rosservice call /target_coordinate "{x: 0.35, y: -0.1, z: 0.0, laser_z: 0.6, beta: 0.2856}"
+    ```
+
+*   **Validate Pan & Tilt Servos**:
+    To send raw target angles (in radians) directly to verify servo motion limits:
+    ```bash
+    rosservice call /test_servos "{pan: 0.5, tilt: 0.1}"
+    ```
 
 ---
 
