@@ -11,23 +11,23 @@ An advanced, high-performance ROS (Robot Operating System) robotic vision and la
 
 ```mermaid
 graph TD
-    subgraph Hardware Peripherals
+    subgraph "Hardware Peripherals"
         ZED[Stereolabs ZED Mini Camera]
         Laser[Pointer Laser Targeter]
         Servos[Dynamixel Servos: Pan & Tilt]
     end
 
-    subgraph Computing Platform (NVIDIA Jetson Nano)
-        subgraph Custom ROS Package: image_processing
+    subgraph "Computing Platform (NVIDIA Jetson Nano)"
+        subgraph "Custom ROS Package: image_processing"
             Detector[Weed Detector Node: Python]
             Solver[Coordinate Solver Module: Python]
         end
         
-        subgraph Custom ROS Package: ryobi_control
+        subgraph "Custom ROS Package: ryobi_control"
             Targeter[Laser Targeter Node: C++]
         end
         
-        subgraph Vendor Packages
+        subgraph "Vendor Packages"
             ZEDWrapper[ZED ROS Wrapper]
             DxlDriver[Dynamixel Workbench Controllers]
         end
